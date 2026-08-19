@@ -38,6 +38,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           docker build \
+            --build-arg REACT_APP_MOVIE_API_URL=http://a8889c9576ff849278a827143d443299-1616461243.us-east-1.elb.amazonaws.com \
             --tag $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }} \
             --tag $ECR_REGISTRY/$ECR_REPOSITORY:latest \
             ./starter/frontend
