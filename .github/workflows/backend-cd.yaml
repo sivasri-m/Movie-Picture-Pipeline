@@ -1,4 +1,3 @@
-```yaml
 name: Backend Continuous Deployment
 
 on:
@@ -118,4 +117,4 @@ jobs:
             backend=$ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
 
           kubectl rollout status deployment/backend
-```
+
