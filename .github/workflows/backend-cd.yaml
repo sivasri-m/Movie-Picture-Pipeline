@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'backend/**'
+      - 'starter/backend/**'
       - '.github/workflows/backend-cd.yaml'
   workflow_dispatch:
 
@@ -40,7 +40,7 @@ jobs:
           docker build \
             --tag $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }} \
             --tag $ECR_REGISTRY/$ECR_REPOSITORY:latest \
-            ./backend
+            ./starter/backend
 
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
@@ -55,7 +55,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          kubectl apply -k backend/k8s
+          kubectl apply -k starter/backend/k8s
 
           kubectl set image deployment/backend \
             backend=$ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
